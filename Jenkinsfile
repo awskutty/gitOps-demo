@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_USERNAME = "sushantkapare1717"
+        DOCKERHUB_USERNAME = "durai54"
         APP_NAME = "gitops-demo-app"
         IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
@@ -18,7 +18,7 @@ pipeline {
         stage('Checkout SCM'){
             steps {
                 git credentialsId: 'github', 
-                url: 'https://github.com/SushatOps/gitops-demo.git',
+                url: 'https://github.com/awskutty/gitops-demo.git',
                 branch: 'dev'
             }
         }
@@ -56,12 +56,12 @@ pipeline {
             steps {
                 script{
                     sh """
-                    git config --global user.name "sushant"
-                    git config --global user.email "sushantkapare1717@gmail.com"
+                    git config --global user.name "awskutty"
+                    git config --global user.email "awskutty45@gmail.com"
                     git add deployment.yml
                     git commit -m 'Updated the deployment file' """
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                        sh "git push http://$user:$pass@github.com/SushantOps/gitops-demo.git dev"
+                        sh "git push http://$user:$pass@github.com/awskutty/gitops-demo.git test"
                     }
                 }
             }
