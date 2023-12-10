@@ -19,7 +19,7 @@ pipeline {
             steps {
                 git credentialsId: 'github', 
                 url: 'https://github.com/awskutty/gitops-demo.git',
-                branch: 'dev'
+                branch: 'test'
             }
         }
         stage('Build Docker Image'){
