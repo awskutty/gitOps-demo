@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_USERNAME = "durai54"
-        APP_NAME = "gitops-demo.app"
+        APP_NAME = "packages"
         IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
         REGISTRY_CREDS = 'dockerhub'
@@ -18,7 +18,7 @@ pipeline {
         stage('Checkout SCM'){
             steps {
                 git credentialsId: 'github', 
-                url: 'https://github.com/awskutty/gitops-demo'
+                url: 'https://github.com/awskutty/gitops-demo.git'
                 branch:'test'
             }
         }
@@ -49,6 +49,8 @@ pipeline {
             steps {
                 sh "cat deployment.yml"
                 sh "sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml"
+                sh "sed -i 's+durai54/packages.*+durai54/packages:${DOCKERTAG}+g' deployment.yaml" to
+                sh "sed -i 's+<your-docker-hub-usename>/packages.*+<your-docker-hub-usename>/packages:${DOCKERTAG}+g' deployment.yaml"
                 sh "cat deployment.yml"
             }
         }
@@ -61,7 +63,7 @@ pipeline {
                     git add deployment.yml
                     git commit -m 'Updated the deployment file' """
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                        sh "git push http://$user:$pass@github.com/awskutty/gitops-demo test"
+                        sh "git push http://$user:$pass@github.com/awskutty/gitops-demo.git test"
                     }
                 }
             }
