@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_USERNAME = "durai54"
-        APP_NAME = "gitops-demo.git"
+        APP_NAME = "gitops-demo.app"
         IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
         REGISTRY_CREDS = 'dockerhub'
@@ -18,7 +18,7 @@ pipeline {
         stage('Checkout SCM'){
             steps {
                 git credentialsId: 'github', 
-                url: 'https://github.com/awskutty/gitops-demo',
+                url: 'https://github.com/awskutty/gitops-demo-app'
                 branch: 'test'
             }
         }
