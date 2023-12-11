@@ -18,7 +18,7 @@ pipeline {
         stage('Checkout SCM'){
             steps {
                 git credentialsId: 'github', 
-                url: 'https://github.com/awskutty/gitops-demo-app'
+                url: 'https://github.com/awskutty/gitops-demo
                 branch: 'test'
             }
         }
