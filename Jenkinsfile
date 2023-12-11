@@ -49,7 +49,7 @@ pipeline {
             steps {
                 sh "cat deployment.yml"
                 sh "sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml"
-                sh "sed -i 's+durai54/packages.*+s+durai54/packages:${DOCKERTAG}+g' deployment.yaml"
+                sh "sed -i 's+durai54/packages.*+sdurai54/packages:${DOCKERTAG}+g' deployment.yaml"
                 sh "cat deployment.yml"
             }
         }
