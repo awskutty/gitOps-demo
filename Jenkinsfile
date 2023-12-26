@@ -50,7 +50,6 @@ pipeline {
                 sh "cat deployment.yml"
                 sh "sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yml"
                 sh "sed -i 's+durai54/packages.*+durai54/packages:${DOCKERTAG}+g' deployment.yaml" to
-                sh "sed -i 's+<your-docker-hub-usename>/packages.*+<your-docker-hub-usename>/packages:${DOCKERTAG}+g' deployment.yaml"
                 sh "cat deployment.yml"
             }
         }
